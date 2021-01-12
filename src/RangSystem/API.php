@@ -29,7 +29,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        return "";
+        return "plugin_data/RankSystem/";
     }
 
     public static function getDefaultGroup() {

@@ -29,7 +29,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        return "/";
+        return "";
     }
 
     public static function getDefaultGroup() {

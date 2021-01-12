@@ -1,5 +1,7 @@
 name: RankSystem
-author: CrowBaldeYT
+author: 
+- CrowBaldeYT
+- r3pt1s
 api: [3.0.0, 4.0.0]
 main: RangSystem\RangSystem
 load: STARTUP

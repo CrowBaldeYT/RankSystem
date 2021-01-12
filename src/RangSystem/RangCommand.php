@@ -61,15 +61,7 @@ class RangCommand extends Command {
                         $sender->sendMessage(RangSystem::getPrefix() . "§aRänge: §r" . implode("§a,§r ", $ranks));
                         return true;
                         break;
-                    case "reload":
-                        API::getGroupConfig()->reload();
-                        foreach (RangSystem::getInstance()->getServer()->getOnlinePlayers() as $op) {
-                            API::getPlayerConfig($op)->reload();
-                            API::getUserManager()->setGroup($op, API::getUserManager()->getGroup($op));
-                        }
 
-                        $sender->sendMessage(RangSystem::getPrefix() . "§aReload erfolgreich ausgeführt.");
-                        break;
                     case "addgruppe":
                         if(isset($args[1])) {
                             if (API::getGroup($args[1])) {

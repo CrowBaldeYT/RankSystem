@@ -17,11 +17,11 @@ class API {
     }
 
     public static function getGroupConfig() {
-        return new Config(self::getDataFolder() . "groups.yml", 2);
+        return new Config("groups.yml", 2);
     }
 
     public static function getConfig() {
-        return new Config(self::getDataFolder() . "config.yml", 2);
+        return new Config("config.yml", 2);
     }
 
     public static function getPlayerConfig(Player $player) {

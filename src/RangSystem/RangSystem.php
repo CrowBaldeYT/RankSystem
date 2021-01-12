@@ -3,7 +3,6 @@
 
 namespace RangSystem;
 
-use LobbySystem\FlyCommand;
 use pocketmine\command\Command;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;

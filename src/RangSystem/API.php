@@ -28,7 +28,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        return "/plugin_data/RankSystem/";
+        return "/home/root/CrowBalde/Test-Server/plugin_data/RankSystem/";
     }
 
     public static function getDefaultGroup() {

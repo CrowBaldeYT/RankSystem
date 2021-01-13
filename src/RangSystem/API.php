@@ -28,7 +28,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        return "/root/CrowBalde/Test-Server/PocketMine-MP/plugin_data/RankSystem/";
+        return $this->getDataFolder();
     }
 
     public static function getDefaultGroup() {

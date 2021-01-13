@@ -11,6 +11,9 @@ use pocketmine\utils\TextFormat;
 class API {
 
     static $plugin;
+
+    static $this = $this->getDataFolder();
+
     public function __construct(RangSystem $rangSystem) {
         self::$plugin = $rangSystem;
     }

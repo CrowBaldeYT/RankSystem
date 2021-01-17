@@ -10,10 +10,14 @@ use pocketmine\utils\TextFormat;
 
 class API {
 
-    public $plugin;
+    static $plugin;
 
     public function __construct(RangSystem $rangSystem) {
         self::$plugin = $rangSystem;
+    }
+    
+    public static function getDataFolder() {
+        return $plugin->getDataFolder();
     }
 
     public static function getGroupConfig() {
@@ -26,10 +30,6 @@ class API {
 
     public static function getPlayerConfig(Player $player) {
         return new Config(self::getDataFolder() . "players/" . $player->getName() . ".yml", 2);
-    }
-
-    public static function getDataFolder() {
-        return $plugin->getDataFolder();
     }
 
     public static function getDefaultGroup() {

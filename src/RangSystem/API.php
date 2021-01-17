@@ -17,7 +17,7 @@ class API {
     }
     
     public static function getDataFolder() {
-        return $plugin->getDataFolder();
+        return self::getDataFolder();
     }
 
     public static function getGroupConfig() {

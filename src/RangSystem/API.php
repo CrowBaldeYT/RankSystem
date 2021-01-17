@@ -31,8 +31,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        $path = $this->getDataFolder();
-        return $path;
+        return "$plugin->getDataFolder();
     }
 
     public static function getDefaultGroup() {

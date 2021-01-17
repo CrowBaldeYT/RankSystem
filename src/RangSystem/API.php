@@ -10,7 +10,7 @@ use pocketmine\utils\TextFormat;
 
 class API {
 
-    static $plugin;
+    public $plugin;
 
     public function __construct(RangSystem $rangSystem) {
         self::$plugin = $rangSystem;

@@ -29,7 +29,7 @@ class API {
     }
 
     public static function getDataFolder() {
-        return "$plugin->getDataFolder();
+        return $plugin->getDataFolder();
     }
 
     public static function getDefaultGroup() {

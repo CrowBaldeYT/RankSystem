@@ -2,7 +2,8 @@ name: RankSystem
 author: 
 - CrowBaldeYT
 - r3pt1s
-api: 3.0.0
+description: German RankSystem by Me & r3pt1s
+api: [3.0.0]
 main: RangSystem\RangSystem
 load: STARTUP
 version: 1.0.0

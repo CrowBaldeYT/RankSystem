@@ -16,6 +16,7 @@ class API {
 
     public function __construct(RangSystem $rangSystem) {
         self::$plugin = $rangSystem;
+        $this->pluginData = $pluginData;
     }
     
     public static function getDataFolder() {

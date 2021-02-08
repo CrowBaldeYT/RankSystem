@@ -3,12 +3,12 @@
 
 namespace RangSystem;
 
-
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\Server;
+use jojoe77777\FormAPI\SimpleForm;
 
 class RangCommand extends Command {
 
@@ -117,14 +117,13 @@ class RangCommand extends Command {
     }
 
     public function groupsUI(Player $player){
-        $api = RangSystem::getInstance()->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createSimpleForm(function (Player $player, int $data = null) {
+        $form = new SimpleForm(function (Player $player, int $data = null) {
             $result = $data;
             if($result === null){
                 return true;
             }
             switch($result) {
-				case 0:
+	            case 0:
                     $ranks = [];
                     foreach (API::getAllGroups() as $group) {
                         $ranks[] = $group;

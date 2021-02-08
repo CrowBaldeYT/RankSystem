@@ -1,6 +1,8 @@
 <?php
 
+
 namespace RangSystem;
+
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -65,13 +67,17 @@ class RangCommand extends Command {
                         break;
 
                     case "reload":
-                        API::getGroupConfig()->reload();
-                        foreach (RangSystem::getInstance()->getServer()->getOnlinePlayers() as $op) {
-                            API::getPlayerConfig($op)->reload();
-                            API::getUserManager()->setGroup($op, API::getUserManager()->getGroup($op));
-                        }
+						if(!$sender instanceof Player){
+							API::getGroupConfig()->reload();
+							foreach (RangSystem::getInstance()->getServer()->getOnlinePlayers() as $op) {
+								API::getPlayerConfig($op)->reload();
+								API::getUserManager()->setGroup($op, API::getUserManager()->getGroup($op));
+							}
 
-                        $sender->sendMessage(RangSystem::getPrefix() . "§aReload erfolgreich ausgeführt.");
+							$sender->sendMessage(RangSystem::getPrefix() . "§aReload erfolgreich ausgeführt.");
+						} else {
+							$this->reloadUI($sender);
+						}
                         break;
 
                     case "addgruppe":
@@ -122,7 +128,7 @@ class RangCommand extends Command {
                 return true;
             }
             switch($result) {
-	            case 0:
+				case 0:
                     $ranks = [];
                     foreach (API::getAllGroups() as $group) {
                         $ranks[] = $group;
@@ -138,4 +144,29 @@ class RangCommand extends Command {
         $form->sendToPlayer($player);
         return $form;
     }
+
+	public function reloadUI(Player $player){
+		$form = new SimpleForm(function (Player $player, int $data = null) {
+			$result = $data;
+			if($result === null){
+				return true;
+			}
+			switch($result) {
+				case 0:
+					API::getGroupConfig()->reload();
+					foreach (RangSystem::getInstance()->getServer()->getOnlinePlayers() as $op) {
+						API::getPlayerConfig($op)->reload();
+						API::getUserManager()->setGroup($op, API::getUserManager()->getGroup($op));
+					}
+
+					$player->sendMessage(RangSystem::getPrefix() . "§aReload erfolgreich ausgeführt.");
+					break;
+			}
+		});
+		$form->setTitle(RangSystem::getPrefix());
+		$form->setContent("§aReloade das Plugin.");
+		$form->addButton("§7Senden");
+		$form->sendToPlayer($player);
+		return $form;
+	}
 }

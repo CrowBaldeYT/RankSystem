@@ -58,19 +58,19 @@ class API {
         } else {
             $cfg = new Config(self::getDataFolder() . "groups.yml", 2);
             // Spieler
-            $cfg->setNested("§7Spieler.chatformat", "§7§l%gruppe% §r§8| §7%name% §8| §r§f%message%");
-            $cfg->setNested("§7Spieler.nametag", "§7§l%gruppe% §r§8| §7%name%");
-            $cfg->setNested("§7Spieler.permissions", ["pocketmine.command.transferserver"]);
+            $cfg->setNested("Spieler.chatformat", "§7§l%gruppe% §r§8| §7%name% §8| §r§f%message%");
+            $cfg->setNested("Spieler.nametag", "§7§l%gruppe% §r§8| §7%name%");
+            $cfg->setNested("Spieler.permissions", ["pocketmine.command.transferserver"]);
 
             //Leitung
-            $cfg->setNested("§cLeitung.chatformat", "§c§l%gruppe% §r§8| §c%name% §8| §r§f%message%");
-            $cfg->setNested("§cLeitung.nametag", "§c§l%gruppe% §r§8| §c%name%");
-            $cfg->setNested("§cLeitung.permissions", ["pocketmine.command.op.give", "*"]);
+            $cfg->setNested("Leitung.chatformat", "§c§l%gruppe% §r§8| §c%name% §8| §r§f%message%");
+            $cfg->setNested("Leitung.nametag", "§c§l%gruppe% §r§8| §c%name%");
+            $cfg->setNested("Leitung.permissions", ["pocketmine.command.op.give", "*"]);
 
             //Admin
-            $cfg->setNested("§4Admin.chatformat", "§4§l%gruppe% §r§8| §4%name% §8| §r§f%message%");
-            $cfg->setNested("§4Admin.nametag", "§4§l%gruppe% §r§8| §4%name%");
-            $cfg->setNested("§4Admin.permissions", ["pocketmine.command.op.give", "*"]);
+            $cfg->setNested("Admin.chatformat", "§4§l%gruppe% §r§8| §4%name% §8| §r§f%message%");
+            $cfg->setNested("Admin.nametag", "§4§l%gruppe% §r§8| §4%name%");
+            $cfg->setNested("Admin.permissions", ["pocketmine.command.op.give", "*"]);
             $cfg->save();
         }
     }

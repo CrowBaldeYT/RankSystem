@@ -12,15 +12,12 @@ class API {
 
     static $plugin;
 
-    public $pluginData;
-
     public function __construct(RangSystem $rangSystem) {
         self::$plugin = $rangSystem;
-        $this->pluginData = $pluginData;
     }
     
     public static function getDataFolder() {
-        return self::$pluginData->getDataFolder();
+        return "/home/Server/plugins/RankSystem/";
     }
 
     public static function getGroupConfig() {

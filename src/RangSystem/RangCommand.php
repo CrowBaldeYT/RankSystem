@@ -1,6 +1,5 @@
 <?php
 
-
 namespace RangSystem;
 
 use pocketmine\command\Command;

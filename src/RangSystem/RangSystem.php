@@ -12,15 +12,16 @@ class RangSystem extends PluginBase implements Listener{
     public static $instance;
 
     public function onEnable(): void {
-        @mkdir(API::getDataFolder() . "players/");
+        @mkdir($this->getDataFolder() . "players/");
         self::$instance = $this;
+		new API($this);
         $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
         $this->getServer()->getCommandMap()->register("rang", new RangCommand("rang.command", "rang", "Rang Command", "/rang"));
         $this->saveResource("config.yml");
         API::createDefaultGroups();
     }
 
-    public static function getInstance():  self {
+    public static function getInstance(): self {
         return self::$instance;
     }
 

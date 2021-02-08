@@ -18,7 +18,6 @@ class EventListener implements Listener {
             $cfg = API::getPlayerConfig($event->getPlayer());
             $cfg->setNested($event->getPlayer()->getName() . ".Name", $event->getPlayer()->getName());
             $cfg->setNested($event->getPlayer()->getName() . ".Gruppe", API::getDefaultGroup());
-            $cfg->setNested($event->getPlayer()->getName() . ".IP", $event->getPlayer()->getAddress());
             $cfg->setNested($event->getPlayer()->getName() . ".UUID", $event->getPlayer()->getUniqueId()->toString());
             $cfg->save();
         }

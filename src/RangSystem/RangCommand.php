@@ -8,6 +8,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
+use pocketmine\Server;
 
 class RangCommand extends Command {
 
@@ -52,13 +53,16 @@ class RangCommand extends Command {
                         }
                         break;
                     case "groups":
+                        if(!$sender instanceof Player){
+                            $ranks = [];
+                            foreach (API::getAllGroups() as $group) {
+                                $ranks[] = $group;
+                            }
 
-                        $ranks = [];
-                        foreach (API::getAllGroups() as $group) {
-                            $ranks[] = $group;
+                            $sender->sendMessage(RangSystem::getPrefix() . "§aRänge: §r" . implode("§a,§r ", $ranks));
+                        } else {
+                            $this->groupsUI($sender);
                         }
-
-                        $sender->sendMessage(RangSystem::getPrefix() . "§aRänge: §r" . implode("§a,§r ", $ranks));
                         break;
 
                     case "reload":
@@ -98,7 +102,7 @@ class RangCommand extends Command {
                             $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
                         }
                 }
-            } else{
+            } else {
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgruppe <player> <gruppe>");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang groups");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgruppe <name>");
@@ -110,5 +114,30 @@ class RangCommand extends Command {
             $sender->sendMessage(RangSystem::getPrefix() . "§cDafür hast du keine Rechte!");
         }
         return true;
+    }
+
+    public function groupsUI(Player $player){
+        $api = RangSystem::getInstance()->getServer()->getPluginManager()->getPlugin("FormAPI");
+        $form = $api->createSimpleForm(function (Player $player, int $data = null) {
+            $result = $data;
+            if($result === null){
+                return true;
+            }
+            switch($result) {
+				case 0:
+                    $ranks = [];
+                    foreach (API::getAllGroups() as $group) {
+                        $ranks[] = $group;
+                    }
+
+                    $player->sendMessage(RangSystem::getPrefix() . "§aRänge: §r" . implode("§a,§r ", $ranks));
+                    break;
+            }
+        });
+        $form->setTitle(RangSystem::getPrefix());
+        $form->setContent("§aZeige dir alle Ränge an.");
+        $form->addButton("§7Senden");
+        $form->sendToPlayer($player);
+        return $form;
     }
 }

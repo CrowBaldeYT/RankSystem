@@ -1,6 +1,5 @@
 <?php
 
-
 namespace RangSystem;
 
 use pocketmine\command\Command;
@@ -193,5 +192,6 @@ class RangCommand extends Command {
 	$form->addLabel("§7Hinzufüge einen Rang");
 	$form->addInput("§fRang§7-§fName§7:", "§7Schreibe einen namen für denn Rang");
 	$form->sendToPlayer($player);
+	return $form;
 	}
 }

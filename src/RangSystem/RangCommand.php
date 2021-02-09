@@ -9,7 +9,7 @@ use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use jojoe77777\FormAPI\SimpleForm;
-use jojoe77777\FormAPI\CustomForm
+use jojoe77777\FormAPI\CustomForm;
 
 class RangCommand extends Command {
 

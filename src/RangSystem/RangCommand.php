@@ -189,7 +189,7 @@ class RangCommand extends Command {
     }
     
 	});
-	$form->setTitle(RankSystem::getPrefix());
+	$form->setTitle(RangSystem::getPrefix());
 	$form->addLabel("§7Hinzufüge einen Rang");
 	$form->addInput("§fRang§7-§fName§7:", "§7Schreibe einen namen für denn Rang");
 	$form->sendToPlayer($player);

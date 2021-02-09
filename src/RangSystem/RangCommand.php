@@ -3,13 +3,13 @@
 
 namespace RangSystem;
 
-
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use jojoe77777\FormAPI\SimpleForm;
+use jojoe77777\FormAPI\CustomForm
 
 class RangCommand extends Command {
 
@@ -23,7 +23,7 @@ class RangCommand extends Command {
         if ($sender->hasPermission($this->getPermission())) {
             if (isset($args[0])) {
                 switch ($args[0]) {
-                    case "setgruppe":
+                    case "setgroup":
                         if (isset($args[1])) {
                             $player = RangSystem::getInstance()->getServer()->getPlayer($args[1]);
                             if (!file_exists(API::getDataFolder() . "players/" . $args[1] . ".yml") and !$player) {
@@ -46,11 +46,11 @@ class RangCommand extends Command {
                                         }
                                     }
                                 } else {
-                                    $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgruppe <player> <gruppe>");
+                                    $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgroup <player> <gruppe>");
                                 }
                             }
                         } else {
-                            $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgruppe <player> <gruppe>");
+                            $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgroup <player> <gruppe>");
                         }
                         break;
                     case "groups":
@@ -80,7 +80,8 @@ class RangCommand extends Command {
 						}
                         break;
 
-                    case "addgruppe":
+                    case "addgroup":
+                      if(!$sender instanceof Player){
                         if(isset($args[1])) {
                             if (API::getGroup($args[1])) {
                                 $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
@@ -92,9 +93,12 @@ class RangCommand extends Command {
                         } else {
                             $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
                         }
-                        break;
+                      } else {
+                        $this->addGroupUI($sender);
+                      }
+                      break;
 
-                    case "removegruppe":
+                    case "removegroup":
                         if(isset($args[1])) {
                             if (!API::getGroup($args[1])) {
                                 $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert nicht!");
@@ -108,10 +112,10 @@ class RangCommand extends Command {
                         }
                 }
             } else {
-                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgruppe <player> <gruppe>");
+                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgroup <player> <gruppe>");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang groups");
-                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgruppe <name>");
-                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang removegruppe <gruppe>");
+                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
+                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang removegroup <gruppe>");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang reload");
 
             }
@@ -168,5 +172,28 @@ class RangCommand extends Command {
 		$form->addButton("§7Senden");
 		$form->sendToPlayer($player);
 		return $form;
+	}
+	
+	public function addGroupUI(Player $player){
+	  $form = new CustomForm(function(Player $player, array $data = null){
+	    
+	    if($data === null){
+	      $player->sendMessage(RankSystem::getPrefix() . "§7Du müsst einen Namen angeben!");
+	      return true;
+	    }
+	    
+        if (API::getGroup($args[1])) {
+          $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
+                 return true;
+        } else {
+         API::addGroup($args[1]);
+          $sender->sendMessage(RangSystem::getPrefix() . "§aDie Gruppe §r" . $args[1] . " §awurde erfolgreich erstellt.");
+    }
+	});
+	$form->setTitle(RankSystem::getPrefix());
+	$form->addLabel("§7Hinzufüge einen Rang");
+	$form->addInput("§fRang§7-§fName§7:", "§7Schreibe einen namen für denn Rang");
+	$form->sendToPlayer($player);
+	return $form;
 	}
 }

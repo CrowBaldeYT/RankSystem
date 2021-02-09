@@ -177,23 +177,21 @@ class RangCommand extends Command {
 	public function addGroupUI(Player $player){
 	  $form = new CustomForm(function(Player $player, array $data = null){
 	    
-	    if($data === null){
-	      $player->sendMessage(RankSystem::getPrefix() . "§7Du müsst einen Namen angeben!");
-	      return true;
-	    }
-	    
-        if (API::getGroup($args[1])) {
-          $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
-                 return true;
+	  if($data === null){
+	    return true;
+	  }
+	  
+	  if (API::getGroup($data[1])) {
+          $player->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
         } else {
-         API::addGroup($args[1]);
-          $sender->sendMessage(RangSystem::getPrefix() . "§aDie Gruppe §r" . $args[1] . " §awurde erfolgreich erstellt.");
+         API::addGroup($data[1]);
+          $player->sendMessage(RangSystem::getPrefix() . "§aDie Gruppe §r" . $data[1] . " §awurde erfolgreich erstellt.");
     }
+    
 	});
 	$form->setTitle(RankSystem::getPrefix());
 	$form->addLabel("§7Hinzufüge einen Rang");
 	$form->addInput("§fRang§7-§fName§7:", "§7Schreibe einen namen für denn Rang");
 	$form->sendToPlayer($player);
-	return $form;
 	}
 }

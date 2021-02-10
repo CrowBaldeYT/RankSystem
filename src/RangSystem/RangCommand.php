@@ -92,7 +92,9 @@ class RangCommand extends Command {
                         } else {
                             $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
                         }
-                      } else {
+                      }
+                      
+                      if($player instanceof Player){
                         $this->addGroupUI($sender);
                       }
                       break;
@@ -107,7 +109,7 @@ class RangCommand extends Command {
                                 $sender->sendMessage(RangSystem::getPrefix() . "§aDie Gruppe §r" . $args[1] . " §awurde erfolgreich gelöscht.");
                             }
                         } else {
-                            $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
+                            $sender->sendMessage(RangSystem::getPrefix() . "§c/rang removegroup <name>");
                         }
                 }
             } else {
@@ -192,6 +194,6 @@ class RangCommand extends Command {
 	$form->addLabel("§7Hinzufüge einen Rang");
 	$form->addInput("§fRang§7-§fName§7:", "§7Schreibe einen namen für denn Rang");
 	$form->sendToPlayer($player);
-	return $form;
+	return true;
 	}
 }

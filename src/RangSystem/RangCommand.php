@@ -79,8 +79,7 @@ class RangCommand extends Command {
 						}
                         break;
 
-                    case "addgroup":
-                      if(!$sender instanceof Player){
+                    case "addgroup"
                         if(isset($args[1])) {
                             if (API::getGroup($args[1])) {
                                 $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
@@ -93,11 +92,15 @@ class RangCommand extends Command {
                             $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
                         }
                       }
-                      
-                      if($sender instanceof Player){
-                        $this->addGroupUI($sender);
-                      }
                       break;
+                      
+                    case "addgroupui"
+                    if(!$sender instanceof Player){
+                      $sender->sendMessage(RangSystem::getPrefix() . "§cDu musst denn Command §7/addgroup <name>§c eingeben!");
+                    } else {
+                    $this->addGroupUI($sender);
+                    }
+                    break;
 
                     case "removegroup":
                         if(isset($args[1])) {
@@ -116,6 +119,7 @@ class RangCommand extends Command {
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang setgroup <player> <gruppe>");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang groups");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroup <name>");
+                $sender->sendMessage(RangSystem::getPrefix() . "§c/rang addgroupui §7(For Onlineplayer)");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang removegroup <gruppe>");
                 $sender->sendMessage(RangSystem::getPrefix() . "§c/rang reload");
 

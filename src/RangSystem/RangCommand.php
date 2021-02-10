@@ -79,7 +79,7 @@ class RangCommand extends Command {
 						}
                         break;
 
-                    case "addgroup"
+                    case "addgroup":
                         if(isset($args[1])) {
                             if (API::getGroup($args[1])) {
                                 $sender->sendMessage(RangSystem::getPrefix() . "§cDiese Gruppe existiert bereits!");
@@ -94,7 +94,7 @@ class RangCommand extends Command {
                       }
                       break;
                       
-                    case "addgroupui"
+                    case "addgroupui":
                     if(!$sender instanceof Player){
                       $sender->sendMessage(RangSystem::getPrefix() . "§cDu musst denn Command §7/addgroup <name>§c eingeben!");
                     } else {

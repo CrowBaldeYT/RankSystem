@@ -94,7 +94,7 @@ class RangCommand extends Command {
                         }
                       }
                       
-                      if($player instanceof Player){
+                      if($sender instanceof Player){
                         $this->addGroupUI($sender);
                       }
                       break;
